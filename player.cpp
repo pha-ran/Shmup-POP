@@ -122,4 +122,10 @@ void DrawPlayer(void)
 
 	MoveCursor(5, 29);
 	printf("HP : %d", player.hp);
+
+	MoveCursor(93, 29);
+	printf("%03d,%03d", player.x, player.y);
+
+	MoveCursor(86, 29);
+	printf("%02d", playerInfo[player.type].framesPerMove);
 }

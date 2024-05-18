@@ -24,12 +24,30 @@
     <ClCompile Include="output.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="file.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="output.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

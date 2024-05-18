@@ -6,12 +6,14 @@ int main(void)
 {
 	InitConsole();
 	InitPlayerInfo();
+	InitPlayer('W', 59, 24);
 
 	for (;;)
 	{
+		MovePlayer();
+
 		ClearBuffer();
-		DrawString(57, 10, "test");
-		DrawSprite(119, 29, 'e');
+		DrawPlayer();
 		PrintBuffer();
 	}
 

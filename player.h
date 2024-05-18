@@ -1,6 +1,11 @@
 #pragma once
 
+#include "input.h"
+#include "output.h"
 #include "file.h"
-#include <stdlib.h>
 
-void InitPlayerInfo();
+void InitPlayerInfo(void);
+void InitPlayer(char sprite, char x, char y);
+bool IsPlayerAlive(void);
+void MovePlayer(void);
+void DrawPlayer(void);

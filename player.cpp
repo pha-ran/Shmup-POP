@@ -14,19 +14,19 @@ struct PlayerInfo
 
 struct Player
 {
-	bool alive;
+	char type;
 	char hp;
 	char x;
 	char y;
 };
 
 PlayerInfo playerInfo[PLAYER_INFO_MAX];
+int playerInfoCount;
 Player player;
 
-void InitPlayerInfo()
+void InitPlayerInfo(void)
 {
 	int index;
-	int playerInfoCount;
 	char tokenBuffer[TOKEN_MAX];
 	char fileName[PLAYER_INFO_MAX][TOKEN_MAX];
 
@@ -53,4 +53,70 @@ void InitPlayerInfo()
 		GetNextToken(tokenBuffer);
 		playerInfo[index].framesPerAttack = atoi(tokenBuffer);
 	}
+}
+
+void InitPlayer(char sprite, char x, char y)
+{
+	int index;
+
+	for (index = 0; index < playerInfoCount; ++index)
+	{
+		if (sprite != playerInfo[index].sprite)
+			continue;
+
+		player.type = index;
+		player.hp = playerInfo[index].maxHp;
+		player.x = x;
+		player.y = y;
+
+		break;
+	}
+}
+
+bool IsPlayerAlive(void)
+{
+	return player.hp > 0;
+}
+
+void MovePlayer(void)
+{
+	static int frameCount;
+
+	if (frameCount < playerInfo[player.type].framesPerMove - 1)
+	{
+		++frameCount;
+		return;
+	}
+
+	frameCount = 0;
+
+	if (GetKey(UP))
+		player.y -= 1;
+
+	if (GetKey(DOWN))
+		player.y += 1;
+
+	if (GetKey(LEFT))
+		player.x -= 1;
+
+	if (GetKey(RIGHT))
+		player.x += 1;
+
+	if (player.x < 0)
+		player.x = 0;
+
+	if (player.y < 0)
+		player.y = 0;
+
+	if (player.x >= CONSOLE_WIDTH)
+		player.x = CONSOLE_WIDTH - 1;
+
+	if (player.y >= CONSOLE_HEIGHT)
+		player.y = CONSOLE_HEIGHT - 1;
+}
+
+void DrawPlayer(void)
+{
+	if (player.hp > 0)
+		DrawSprite(player.x, player.y, playerInfo[player.type].sprite);
 }

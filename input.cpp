@@ -1,10 +1,10 @@
 #include "input.h"
 
-#define MAX_KEY_COUNT 0xFF
+#define KEY_MAX 0xFF
 
 bool GetKeyDown(KEY key)
 {
-	static bool flag[MAX_KEY_COUNT];
+	static bool flag[KEY_MAX];
 
 	if (GetAsyncKeyState(key) & 0x8000)
 	{

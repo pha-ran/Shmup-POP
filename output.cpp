@@ -3,8 +3,8 @@
 #define	BUFFER_WIDTH	CONSOLE_WIDTH + 1
 #define	BUFFER_HEIGHT	CONSOLE_HEIGHT
 
-HANDLE console;
-char buffer[BUFFER_HEIGHT][BUFFER_WIDTH];
+static HANDLE console;
+static char buffer[BUFFER_HEIGHT][BUFFER_WIDTH];
 
 void InitConsole(void)
 {

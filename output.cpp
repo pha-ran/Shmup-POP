@@ -18,6 +18,16 @@ void InitConsole(void)
 	SetConsoleCursorInfo(console, &cursor);
 }
 
+void MoveCursor(SHORT x, SHORT y)
+{
+	COORD coord;
+
+	coord.X = x;
+	coord.Y = y;
+
+	SetConsoleCursorPosition(console, coord);
+}
+
 void ClearBuffer(void)
 {
 	SHORT row;
@@ -38,7 +48,7 @@ void PrintBuffer(void)
 
 	for (row = 0; row < CONSOLE_HEIGHT; ++row)
 	{
-		SetConsoleCursorPosition(console, { 0, row });
+		MoveCursor(0, row);
 		printf(buffer[row]);
 	}
 }

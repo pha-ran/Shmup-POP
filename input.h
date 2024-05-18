@@ -2,8 +2,6 @@
 
 #include <windows.h>
 
-#define MAX_KEY_COUNT 0xFF
-
 enum KEY
 {
 	ESC = VK_ESCAPE,

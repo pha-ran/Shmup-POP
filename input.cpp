@@ -1,5 +1,7 @@
 #include "input.h"
 
+#define MAX_KEY_COUNT 0xFF
+
 bool GetKeyDown(KEY key)
 {
 	static bool flag[MAX_KEY_COUNT];

@@ -22,7 +22,7 @@ void InitConsole(void)
 	for (index = 0; index < BUFFER_WIDTH - 1; ++index)
 		blankLine[index] = ' ';
 
-	blankLine[BUFFER_WIDTH - 1] = '\0';
+	blankLine[BUFFER_WIDTH - 2] = '\0';
 }
 
 void MoveCursor(SHORT x, SHORT y)

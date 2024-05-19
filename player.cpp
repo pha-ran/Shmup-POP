@@ -90,19 +90,29 @@ void MovePlayer(void)
 		return;
 	}
 
-	frameCount = 0;
-
 	if (GetKey(UP))
+	{
 		player.y -= 1;
+		frameCount = 0;
+	}
 
 	if (GetKey(DOWN))
+	{
 		player.y += 1;
+		frameCount = 0;
+	}
 
 	if (GetKey(LEFT))
+	{
 		player.x -= 1;
+		frameCount = 0;
+	}
 
 	if (GetKey(RIGHT))
+	{
 		player.x += 1;
+		frameCount = 0;
+	}
 
 	if (player.x < 0)
 		player.x = 0;
@@ -127,10 +137,11 @@ void FirePlayer(void)
 		return;
 	}
 
-	frameCount = 0;
-
 	if (GetKey(SPACE))
+	{
 		AddBullet(1, player.x, player.y - 1);
+		frameCount = 0;
+	}
 }
 
 bool IsPlayerHit(char x, char y)

@@ -189,6 +189,25 @@ void FireEnemy(void)
 	}
 }
 
+bool IsEnemyHit(char x, char y)
+{
+	int index;
+
+	for (index = 0; index < enemyCount; ++index)
+	{
+		if (enemy[index].hp <= 0)
+			continue;
+
+		if (x == enemy[index].x && y == enemy[index].y)
+		{
+			enemy[index].hp -= 1;
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void DrawEnemy(void)
 {
 	int index;

@@ -78,6 +78,7 @@ int main(void)
 			MoveEnemy();
 			FireEnemy();
 			MoveBullet();
+			DamageBullet();
 			if (GetKey(ESC))
 				Sleep(SECOND);
 			// ~Logic

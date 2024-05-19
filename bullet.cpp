@@ -68,6 +68,28 @@ void MoveBullet(void)
 	}
 }
 
+void DamageBullet(void)
+{
+	int index;
+
+	for (index = 0; index < BULLET_MAX; ++index)
+	{
+		if (bullet[index].active == false)
+			continue;
+
+		if (bullet[index].type == 1)
+		{
+			if (IsEnemyHit(bullet[index].x, bullet[index].y))
+				bullet[index].active = false;
+		}
+		else if (bullet[index].type == 2)
+		{
+			if (IsPlayerHit(bullet[index].x, bullet[index].y))
+				bullet[index].active = false;
+		}
+	}
+}
+
 void DrawBullet(void)
 {
 	int index;
@@ -79,7 +101,6 @@ void DrawBullet(void)
 
 		if (bullet[index].type == 1)
 			DrawSprite(bullet[index].x, bullet[index].y, 'o');
-
 		else if (bullet[index].type == 2)
 			DrawSprite(bullet[index].x, bullet[index].y, 'x');
 	}

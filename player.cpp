@@ -133,6 +133,17 @@ void FirePlayer(void)
 		AddBullet(1, player.x, player.y - 1);
 }
 
+bool IsPlayerHit(char x, char y)
+{
+	if (x == player.x && y == player.y)
+	{
+		player.hp -= 1;
+		return true;
+	}
+
+	return false;
+}
+
 void DrawPlayer(void)
 {
 	if (player.hp <= 0)

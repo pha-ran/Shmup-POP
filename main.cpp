@@ -3,6 +3,7 @@
 #include "input.h"
 #include "output.h"
 #include "scene.h"
+#include "stage.h"
 #include "player.h"
 #include "enemy.h"
 
@@ -26,6 +27,7 @@ int main(void)
 	timeBeginPeriod(1);
 
 	InitConsole();
+	InitStageInfo();
 	InitPlayerInfo();
 	InitEnemyInfo();
 
@@ -35,28 +37,41 @@ int main(void)
 		{
 		case TITLE:
 			if (GetKeyDown(ENTER))
+			{
 				scene = LOAD;
+				break;
+			}
 			if (GetKeyDown(ESC))
+			{
 				scene = EXIT;
+				break;
+			}
+			ClearBuffer();
 			PrintTitle();
 			break;
 
 		case LOAD:
-			InitPlayer('V', 59, 24);
-			InitPlayer('M', 59, 24);
-			InitPlayer('A', 59, 24);
-			InitPlayer('W', 59, 24);
-			InitEnemy();
-			AddEnemy('A', 10, 10);
-			AddEnemy('B', 10, 11);
-			AddEnemy('C', 30, 10);
-			AddEnemy('D', 40, 10);
+			if (!LoadStage())
+			{
+				scene = TITLE;
+				break;
+			}
 			InitTime();
 			scene = GAME;
 			break;
 
 		case GAME:
 			// Logic
+			if (!IsPlayerAlive())
+			{
+				scene = OVER;
+				break;
+			}
+			if (!IsEnemyAlive())
+			{
+				scene = CLEAR;
+				break;
+			}
 			MovePlayer();
 			MoveEnemy();
 			if (GetKey(ESC))
@@ -73,6 +88,7 @@ int main(void)
 
 			// Render
 			ClearBuffer();
+			DrawStage();
 			DrawPlayer();
 			DrawEnemy();
 			PrintBuffer();
@@ -82,13 +98,20 @@ int main(void)
 
 		case CLEAR:
 			if (GetKeyDown(ENTER))
+			{
 				scene = LOAD;
+				break;
+			}
 			PrintClear();
 			break;
 
 		case OVER:
+			InitStage();
 			if (GetKeyDown(ENTER))
+			{
 				scene = TITLE;
+				break;
+			}
 			PrintOver();
 			break;
 

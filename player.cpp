@@ -26,9 +26,9 @@ Player player;
 
 void InitPlayerInfo(void)
 {
-	int index;
 	char tokenBuffer[TOKEN_MAX];
 	char fileName[PLAYER_INFO_MAX][TOKEN_MAX];
+	int index;
 
 	GetFirstToken(PLAYER_CONFIG_FILE, tokenBuffer);
 	playerInfoCount = atoi(tokenBuffer);

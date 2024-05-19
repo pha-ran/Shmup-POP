@@ -6,6 +6,7 @@
 #include "stage.h"
 #include "player.h"
 #include "enemy.h"
+#include "bullet.h"
 
 #define FRAMES_PER_SECOND		50
 #define SECOND					1000
@@ -74,6 +75,7 @@ int main(void)
 			}
 			MovePlayer();
 			MoveEnemy();
+			MoveBullet();
 			if (GetKey(ESC))
 				Sleep(SECOND);
 			// ~Logic
@@ -91,6 +93,7 @@ int main(void)
 			DrawStage();
 			DrawPlayer();
 			DrawEnemy();
+			DrawBullet();
 			PrintBuffer();
 			++renderFrameCount;
 			// ~Render

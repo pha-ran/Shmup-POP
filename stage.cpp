@@ -15,8 +15,8 @@ StageInfo stageInfo;
 
 void InitStageInfo(void)
 {
-	int index;
 	char tokenBuffer[TOKEN_MAX];
+	int index;
 
 	GetFirstToken(STAGE_CONFIG_FILE, tokenBuffer);
 	stageInfo.count = atoi(tokenBuffer);
@@ -49,6 +49,7 @@ bool LoadStage(void)
 
 	InitEnemy();
 	InitPlayer(0, 0, 0);
+	InitBullet();
 
 	GetFirstToken(stageInfo.fileName[stageInfo.current], tokenBuffer);
 	count = atoi(tokenBuffer);

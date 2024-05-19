@@ -117,8 +117,10 @@ void MovePlayer(void)
 
 void DrawPlayer(void)
 {
-	if (player.hp > 0)
-		DrawSprite(player.x, player.y, playerInfo[player.type].sprite);
+	if (player.hp <= 0)
+		return;
+	
+	DrawSprite(player.x, player.y, playerInfo[player.type].sprite);
 
 	MoveCursor(5, 29);
 	printf("HP : %d", player.hp);

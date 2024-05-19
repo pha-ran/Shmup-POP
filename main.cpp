@@ -42,7 +42,15 @@ int main(void)
 			break;
 
 		case LOAD:
+			InitPlayer('V', 59, 24);
+			InitPlayer('M', 59, 24);
+			InitPlayer('A', 59, 24);
 			InitPlayer('W', 59, 24);
+			InitEnemy();
+			AddEnemy('A', 10, 10);
+			AddEnemy('B', 10, 11);
+			AddEnemy('C', 30, 10);
+			AddEnemy('D', 40, 10);
 			InitTime();
 			scene = GAME;
 			break;
@@ -50,6 +58,7 @@ int main(void)
 		case GAME:
 			// Logic
 			MovePlayer();
+			MoveEnemy();
 			if (GetKey(ESC))
 				Sleep(SECOND);
 			// ~Logic
@@ -65,6 +74,7 @@ int main(void)
 			// Render
 			ClearBuffer();
 			DrawPlayer();
+			DrawEnemy();
 			PrintBuffer();
 			++renderFrameCount;
 			// ~Render

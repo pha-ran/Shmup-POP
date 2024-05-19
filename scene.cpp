@@ -7,6 +7,7 @@ void PrintTitle(void)
 	DrawString(50, 19, "press enter to start");
 	DrawString(51, 21, "press esc to exit");
 	PrintBuffer();
+	ClearHUD();
 }
 
 void PrintClear(void)

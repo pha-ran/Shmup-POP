@@ -20,9 +20,9 @@ struct Player
 	char y;
 };
 
-PlayerInfo playerInfo[PLAYER_INFO_MAX];
-int playerInfoCount;
-Player player;
+static PlayerInfo playerInfo[PLAYER_INFO_MAX];
+static int playerInfoCount;
+static Player player;
 
 void InitPlayerInfo(void)
 {

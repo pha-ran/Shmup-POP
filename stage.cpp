@@ -11,7 +11,7 @@ struct StageInfo
 	char fileName[STAGE_INFO_MAX][TOKEN_MAX];
 };
 
-StageInfo stageInfo;
+static StageInfo stageInfo;
 
 void InitStageInfo(void)
 {

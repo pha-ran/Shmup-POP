@@ -12,3 +12,4 @@ void ClearBuffer(void);
 void PrintBuffer(void);
 void DrawSprite(SHORT x, SHORT y, CHAR sprite);
 void DrawString(SHORT x, SHORT y, LPCSTR string);
+void ClearHUD(void);

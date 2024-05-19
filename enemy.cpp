@@ -27,10 +27,10 @@ struct Enemy
 	char y;
 };
 
-EnemyInfo enemyInfo[ENEMY_INFO_MAX];
-int enemyInfoCount;
-Enemy enemy[ENEMY_MAX];
-int enemyCount;
+static EnemyInfo enemyInfo[ENEMY_INFO_MAX];
+static int enemyInfoCount;
+static Enemy enemy[ENEMY_MAX];
+static int enemyCount;
 
 void InitEnemyInfo(void)
 {

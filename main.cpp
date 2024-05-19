@@ -12,12 +12,12 @@
 #define SECOND					1000
 #define MILLISECONDS_PER_FRAME	SECOND / FRAMES_PER_SECOND
 
-Scene scene;
-DWORD current;
-DWORD previous;
-DWORD previousSecond;
-DWORD logicFrameCount;
-DWORD renderFrameCount;
+static Scene scene;
+static DWORD current;
+static DWORD previous;
+static DWORD previousSecond;
+static DWORD logicFrameCount;
+static DWORD renderFrameCount;
 
 void InitTime(void);
 void PrintFPS(void);
@@ -132,6 +132,8 @@ void InitTime(void)
 {
 	previous = timeGetTime();
 	previousSecond = previous;
+	logicFrameCount = 0;
+	renderFrameCount = 0;
 }
 
 void PrintFPS(void)

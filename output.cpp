@@ -5,10 +5,12 @@
 
 static HANDLE console;
 static char buffer[BUFFER_HEIGHT][BUFFER_WIDTH];
+static char blankLine[BUFFER_WIDTH];
 
 void InitConsole(void)
 {
 	CONSOLE_CURSOR_INFO cursor;
+	SHORT index;
 
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -16,6 +18,11 @@ void InitConsole(void)
 	cursor.dwSize = 1;
 
 	SetConsoleCursorInfo(console, &cursor);
+
+	for (index = 0; index < BUFFER_WIDTH - 1; ++index)
+		blankLine[index] = ' ';
+
+	blankLine[BUFFER_WIDTH - 1] = '\0';
 }
 
 void MoveCursor(SHORT x, SHORT y)
@@ -75,4 +82,10 @@ void DrawString(SHORT x, SHORT y, LPCSTR string)
 
 		buffer[y][x + index] = string[index];
 	}
+}
+
+void ClearHUD(void)
+{
+	MoveCursor(0, CONSOLE_HEIGHT);
+	printf(blankLine);
 }

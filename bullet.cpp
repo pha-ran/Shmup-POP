@@ -11,7 +11,7 @@ struct Bullet
 	char y;
 };
 
-Bullet bullet[BULLET_MAX];
+static Bullet bullet[BULLET_MAX];
 
 void InitBullet(void)
 {

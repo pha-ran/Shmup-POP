@@ -4,6 +4,7 @@
 #include "output.h"
 #include "scene.h"
 #include "player.h"
+#include "enemy.h"
 
 #define FRAMES_PER_SECOND		50
 #define SECOND					1000
@@ -26,6 +27,7 @@ int main(void)
 
 	InitConsole();
 	InitPlayerInfo();
+	InitEnemyInfo();
 
 	for (;;)
 	{
@@ -52,13 +54,13 @@ int main(void)
 				Sleep(SECOND);
 			// ~Logic
 
-			// Check Render Skip
+			// Frame
 			current = timeGetTime();
 			PrintFPS();
 			++logicFrameCount;
 			if (CheckRenderSkip())
 				continue;
-			// ~Check Render Skip
+			// ~Frame
 
 			// Render
 			ClearBuffer();

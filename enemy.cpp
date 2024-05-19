@@ -12,7 +12,7 @@ struct EnemyInfo
 	char sprite;
 	char maxHp;
 	char framesPerMove;
-	char framesPerAttack;
+	char framesPerFire;
 	char moveCount;
 	char x[ENEMY_MOVE_COUNT_MAX];
 	char y[ENEMY_MOVE_COUNT_MAX];
@@ -61,7 +61,7 @@ void InitEnemyInfo(void)
 		enemyInfo[index].framesPerMove = atoi(tokenBuffer);
 
 		GetNextToken(tokenBuffer);
-		enemyInfo[index].framesPerAttack = atoi(tokenBuffer);
+		enemyInfo[index].framesPerFire = atoi(tokenBuffer);
 
 		GetNextToken(tokenBuffer);
 		sprintf_s(moveFileName, ENEMY_MOVE_PATH, tokenBuffer);
@@ -164,6 +164,28 @@ void MoveEnemy(void)
 
 		if (enemy[index].y >= CONSOLE_HEIGHT)
 			enemy[index].y = CONSOLE_HEIGHT - 1;
+	}
+}
+
+void FireEnemy(void)
+{
+	static int frameCount[ENEMY_MAX];
+	int index;
+
+	for (index = 0; index < enemyCount; ++index)
+	{
+		if (enemy[index].hp <= 0)
+			continue;
+
+		if (frameCount[index] < enemyInfo[enemy[index].type].framesPerFire - 1)
+		{
+			frameCount[index] += 1;
+			continue;
+		}
+
+		frameCount[index] = 0;
+
+		AddBullet(2, enemy[index].x, enemy[index].y + 1);
 	}
 }
 

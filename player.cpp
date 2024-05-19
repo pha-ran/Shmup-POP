@@ -9,7 +9,7 @@ struct PlayerInfo
 	char sprite;
 	char maxHp;
 	char framesPerMove;
-	char framesPerAttack;
+	char framesPerFire;
 };
 
 struct Player
@@ -51,7 +51,7 @@ void InitPlayerInfo(void)
 		playerInfo[index].framesPerMove = atoi(tokenBuffer);
 
 		GetNextToken(tokenBuffer);
-		playerInfo[index].framesPerAttack = atoi(tokenBuffer);
+		playerInfo[index].framesPerFire = atoi(tokenBuffer);
 	}
 }
 
@@ -115,6 +115,22 @@ void MovePlayer(void)
 
 	if (player.y >= CONSOLE_HEIGHT)
 		player.y = CONSOLE_HEIGHT - 1;
+}
+
+void FirePlayer(void)
+{
+	static int frameCount;
+
+	if (frameCount < playerInfo[player.type].framesPerFire - 1)
+	{
+		++frameCount;
+		return;
+	}
+
+	frameCount = 0;
+
+	if (GetKey(SPACE))
+		AddBullet(1, player.x, player.y - 1);
 }
 
 void DrawPlayer(void)

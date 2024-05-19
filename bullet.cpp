@@ -1,7 +1,7 @@
 #include "bullet.h"
 
 #define BULLET_MAX		200
-#define FRAMES_PER_MOVE	3
+#define FRAMES_PER_MOVE	2
 
 struct Bullet
 {

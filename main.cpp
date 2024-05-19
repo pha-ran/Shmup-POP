@@ -74,7 +74,9 @@ int main(void)
 				break;
 			}
 			MovePlayer();
+			FirePlayer();
 			MoveEnemy();
+			FireEnemy();
 			MoveBullet();
 			if (GetKey(ESC))
 				Sleep(SECOND);

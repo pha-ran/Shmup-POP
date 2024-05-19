@@ -59,6 +59,8 @@ void InitPlayer(char sprite, char x, char y)
 {
 	int index;
 
+	player.hp = 0;
+
 	for (index = 0; index < playerInfoCount; ++index)
 	{
 		if (sprite != playerInfo[index].sprite)

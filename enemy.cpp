@@ -34,11 +34,11 @@ int enemyCount;
 
 void InitEnemyInfo(void)
 {
-	int index;
 	char tokenBuffer[TOKEN_MAX];
 	char fileName[ENEMY_INFO_MAX][TOKEN_MAX];
-	int moveIndex;
 	char moveFileName[TOKEN_MAX];
+	int index;
+	int moveIndex;
 
 	GetFirstToken(ENEMY_CONFIG_FILE, tokenBuffer);
 	enemyInfoCount = atoi(tokenBuffer);

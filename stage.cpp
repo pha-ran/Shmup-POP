@@ -35,6 +35,12 @@ void InitStage(void)
 
 bool LoadStage(void)
 {
+	char tokenBuffer[TOKEN_MAX];
+	int count;
+	char sprite;
+	char x;
+	char y;
+
 	if (stageInfo.current >= stageInfo.count)
 	{
 		InitStage();
@@ -42,11 +48,39 @@ bool LoadStage(void)
 	}
 
 	InitEnemy();
-	InitPlayer('W', 59, 24);
-	AddEnemy('A', 59, 10);
-	AddEnemy('B', 59, 11);
-	AddEnemy('C', 59, 10);
-	AddEnemy('D', 59, 10);
+	InitPlayer(0, 0, 0);
+
+	GetFirstToken(stageInfo.fileName[stageInfo.current], tokenBuffer);
+	count = atoi(tokenBuffer);
+
+	GetNextToken(tokenBuffer);
+	sprite = tokenBuffer[0];
+
+	GetNextToken(tokenBuffer);
+	x = atoi(tokenBuffer);
+
+	GetNextToken(tokenBuffer);
+	y = atoi(tokenBuffer);
+
+	InitPlayer(sprite, x, y);
+	--count;
+
+	while (count > 0)
+	{
+		GetNextToken(tokenBuffer);
+		sprite = tokenBuffer[0];
+
+		GetNextToken(tokenBuffer);
+		x = atoi(tokenBuffer);
+
+		GetNextToken(tokenBuffer);
+		y = atoi(tokenBuffer);
+
+		AddEnemy(sprite, x, y);
+
+		--count;
+	}
+	
 	stageInfo.current += 1;
 
 	return true;

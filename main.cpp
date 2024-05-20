@@ -86,7 +86,6 @@ int main(void)
 			// Frame
 			current = timeGetTime();
 			PrintFPS();
-			++logicFrameCount;
 			if (CheckRenderSkip())
 				continue;
 			// ~Frame
@@ -98,7 +97,6 @@ int main(void)
 			DrawEnemy();
 			DrawBullet();
 			PrintBuffer();
-			++renderFrameCount;
 			// ~Render
 			break;
 
@@ -150,14 +148,16 @@ void PrintFPS(void)
 
 bool CheckRenderSkip(void)
 {
-	if (current - previous >= MILLISECONDS_PER_FRAME)
-	{
-		previous += MILLISECONDS_PER_FRAME;
-		return true;
-	}
+	DWORD frameTime = current - previous;
 
-	Sleep(MILLISECONDS_PER_FRAME - (current - previous));
 	previous += MILLISECONDS_PER_FRAME;
+	++logicFrameCount;
 
+	if (frameTime >= MILLISECONDS_PER_FRAME * 2)
+		return true;
+	else if (frameTime < MILLISECONDS_PER_FRAME)
+		Sleep(MILLISECONDS_PER_FRAME - frameTime);
+
+	++renderFrameCount;
 	return false;
 }

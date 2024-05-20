@@ -1,4 +1,5 @@
-3
+4
 enemy1.txt
 enemy2.txt
 enemy3.txt
+enemy4.txt

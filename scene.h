@@ -1,7 +1,5 @@
 #pragma once
 
-#include "output.h"
-
 enum Scene
 {
 	TITLE,

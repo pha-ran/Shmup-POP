@@ -1,11 +1,17 @@
 #include "enemy.h"
+#include "input.h"
+#include "output.h"
+#include "file.h"
+#include "bullet.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define ENEMY_CONFIG_FILE		"config\\enemy.txt"
 #define ENEMY_INFO_PATH			"config\\enemy\\%s"
-#define ENEMY_INFO_MAX			10
+#define ENEMY_INFO_MAX			(10)
 #define ENEMY_MOVE_PATH			"config\\enemy\\move\\%s"
-#define ENEMY_MOVE_COUNT_MAX	20
-#define ENEMY_MAX				20
+#define ENEMY_MOVE_COUNT_MAX	(20)
+#define ENEMY_MAX				(20)
 
 struct EnemyInfo
 {
@@ -22,6 +28,8 @@ struct Enemy
 {
 	char type;
 	char hp;
+	char moveCount;
+	char fireCount;
 	char moveIndex;
 	char x;
 	char y;
@@ -104,6 +112,9 @@ void AddEnemy(char sprite, char x, char y)
 
 		enemy[enemyCount].type = index;
 		enemy[enemyCount].hp = enemyInfo[index].maxHp;
+		enemy[enemyCount].moveCount = 0;
+		enemy[enemyCount].fireCount = 0;
+		enemy[enemyCount].moveIndex = 0;
 		enemy[enemyCount].x = x;
 		enemy[enemyCount].y = y;
 		++enemyCount;
@@ -127,7 +138,6 @@ bool IsEnemyAlive(void)
 
 void MoveEnemy(void)
 {
-	static int frameCount[ENEMY_MAX];
 	int index;
 	int type;
 
@@ -138,13 +148,13 @@ void MoveEnemy(void)
 
 		type = enemy[index].type;
 
-		if (frameCount[index] < enemyInfo[type].framesPerMove - 1)
+		if (enemy[index].moveCount < enemyInfo[type].framesPerMove - 1)
 		{
-			frameCount[index] += 1;
+			enemy[index].moveCount += 1;
 			continue;
 		}
 
-		frameCount[index] = 0;
+		enemy[index].moveCount = 0;
 
 		if (enemy[index].moveIndex >= enemyInfo[type].moveCount)
 			enemy[index].moveIndex = 0;
@@ -169,7 +179,6 @@ void MoveEnemy(void)
 
 void FireEnemy(void)
 {
-	static int frameCount[ENEMY_MAX];
 	int index;
 
 	for (index = 0; index < enemyCount; ++index)
@@ -177,13 +186,13 @@ void FireEnemy(void)
 		if (enemy[index].hp <= 0)
 			continue;
 
-		if (frameCount[index] < enemyInfo[enemy[index].type].framesPerFire - 1)
+		if (enemy[index].fireCount < enemyInfo[enemy[index].type].framesPerFire - 1)
 		{
-			frameCount[index] += 1;
+			enemy[index].fireCount += 1;
 			continue;
 		}
 
-		frameCount[index] = 0;
+		enemy[index].fireCount = 0;
 
 		AddBullet(2, enemy[index].x, enemy[index].y + 1);
 	}

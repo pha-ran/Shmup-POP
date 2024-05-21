@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "output.h"
 
 void PrintTitle(void)
 {

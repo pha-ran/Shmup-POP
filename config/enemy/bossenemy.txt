@@ -1,0 +1,5 @@
+E
+10
+10
+60
+bossmove.txt

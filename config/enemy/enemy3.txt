@@ -1,5 +1,5 @@
 C
 3
-8
-25
-move2.txt
+12
+90
+move1.txt

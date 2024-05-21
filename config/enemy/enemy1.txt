@@ -1,5 +1,5 @@
 A
-1
-6
-20
-move1.txt
+2
+10
+75
+move2.txt

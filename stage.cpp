@@ -1,8 +1,15 @@
 #include "stage.h"
+#include "output.h"
+#include "file.h"
+#include "player.h"
+#include "enemy.h"
+#include "bullet.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define STAGE_CONFIG_FILE	"config\\stage.txt"
 #define STAGE_INFO_PATH		"config\\stage\\%s"
-#define STAGE_INFO_MAX		10
+#define STAGE_INFO_MAX		(10)
 
 struct StageInfo
 {
@@ -78,12 +85,10 @@ bool LoadStage(void)
 		y = atoi(tokenBuffer);
 
 		AddEnemy(sprite, x, y);
-
 		--count;
 	}
 	
 	stageInfo.current += 1;
-
 	return true;
 }
 
@@ -91,11 +96,11 @@ void DrawStage(void)
 {
 	if (stageInfo.current >= stageInfo.count)
 	{
-		MoveCursor(55, 29);
+		MoveCursor(CONSOLE_WIDTH / 2 - 5, CONSOLE_HEIGHT);
 		printf("LAST STAGE");
 		return;
 	}
 
-	MoveCursor(57, 29);
+	MoveCursor(CONSOLE_WIDTH / 2 - 4, 29);
 	printf("STAGE %d", stageInfo.current);
 }

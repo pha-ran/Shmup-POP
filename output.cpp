@@ -1,7 +1,9 @@
 #include "output.h"
+#include <stdio.h>
+#include <windows.h>
 
-#define	BUFFER_WIDTH	CONSOLE_WIDTH + 1
-#define	BUFFER_HEIGHT	CONSOLE_HEIGHT
+#define	BUFFER_WIDTH	(CONSOLE_WIDTH + 1)
+#define	BUFFER_HEIGHT	(CONSOLE_HEIGHT)
 
 static HANDLE console;
 static char buffer[BUFFER_HEIGHT][BUFFER_WIDTH];
@@ -25,7 +27,7 @@ void InitConsole(void)
 	blankLine[BUFFER_WIDTH - 2] = '\0';
 }
 
-void MoveCursor(SHORT x, SHORT y)
+void MoveCursor(short x, short y)
 {
 	COORD coord;
 
@@ -60,7 +62,7 @@ void PrintBuffer(void)
 	}
 }
 
-void DrawSprite(SHORT x, SHORT y, CHAR sprite)
+void DrawSprite(short x, short y, char sprite)
 {
 	if (x < 0 || y < 0 || x >= CONSOLE_WIDTH || y >= CONSOLE_HEIGHT)
 		return;
@@ -68,7 +70,7 @@ void DrawSprite(SHORT x, SHORT y, CHAR sprite)
 	buffer[y][x] = sprite;
 }
 
-void DrawString(SHORT x, SHORT y, LPCSTR string)
+void DrawString(short x, short y, const char* string)
 {
 	SHORT index;
 

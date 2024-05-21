@@ -7,10 +7,16 @@
 #include "player.h"
 #include "enemy.h"
 #include "bullet.h"
+#include <stdio.h>
+#include <windows.h>
 
-#define FRAMES_PER_SECOND		50
-#define SECOND					1000
-#define MILLISECONDS_PER_FRAME	SECOND / FRAMES_PER_SECOND
+#define FRAMES_PER_SECOND		(50)
+#define SECOND					(1000)
+#define MILLISECONDS_PER_FRAME	((SECOND) / (FRAMES_PER_SECOND))
+
+void InitTime(void);
+void PrintFPS(void);
+bool CheckRenderSkip(void);
 
 static Scene scene;
 static DWORD current;
@@ -18,10 +24,6 @@ static DWORD previous;
 static DWORD previousSecond;
 static DWORD logicFrameCount;
 static DWORD renderFrameCount;
-
-void InitTime(void);
-void PrintFPS(void);
-bool CheckRenderSkip(void);
 
 int main(void)
 {
@@ -74,10 +76,10 @@ int main(void)
 				break;
 			}
 			MovePlayer();
-			FirePlayer();
 			MoveEnemy();
-			FireEnemy();
 			MoveBullet();
+			FirePlayer();
+			FireEnemy();
 			DamageBullet();
 			if (GetKey(ESC))
 				Sleep(SECOND);
@@ -138,7 +140,7 @@ void PrintFPS(void)
 {
 	if (current - previousSecond >= SECOND)
 	{
-		MoveCursor(105, 29);
+		MoveCursor(CONSOLE_WIDTH - 15, CONSOLE_HEIGHT);
 		printf("FPS %d(%d)  ", logicFrameCount, renderFrameCount);
 		previousSecond += SECOND;
 		logicFrameCount = 0;

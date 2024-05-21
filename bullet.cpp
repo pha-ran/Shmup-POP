@@ -1,11 +1,15 @@
 #include "bullet.h"
+#include "output.h"
+#include "player.h"
+#include "enemy.h"
 
-#define BULLET_MAX		200
-#define FRAMES_PER_MOVE	2
+#define BULLET_MAX		(200)
+#define FRAMES_PER_MOVE	(2)
 
 struct Bullet
 {
 	bool active;
+	char moveCount;
 	char type;
 	char x;
 	char y;
@@ -31,6 +35,7 @@ void AddBullet(char type, char x, char y)
 			continue;
 
 		bullet[index].active = true;
+		bullet[index].moveCount = 0;
 		bullet[index].type = type;
 		bullet[index].x = x;
 		bullet[index].y = y;
@@ -41,7 +46,6 @@ void AddBullet(char type, char x, char y)
 
 void MoveBullet(void)
 {
-	static int frameCount[BULLET_MAX];
 	int index;
 
 	for (index = 0; index < BULLET_MAX; ++index)
@@ -49,13 +53,13 @@ void MoveBullet(void)
 		if (bullet[index].active == false)
 			continue;
 
-		if (frameCount[index] < FRAMES_PER_MOVE - 1)
+		if (bullet[index].moveCount < FRAMES_PER_MOVE - 1)
 		{
-			frameCount[index] += 1;
+			bullet[index].moveCount += 1;
 			continue;
 		}
 
-		frameCount[index] = 0;
+		bullet[index].moveCount = 0;
 
 		if (bullet[index].type == 1)
 			bullet[index].y -= 1;

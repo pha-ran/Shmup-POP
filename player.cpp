@@ -1,8 +1,14 @@
 #include "player.h"
+#include "input.h"
+#include "output.h"
+#include "file.h"
+#include "bullet.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define PLAYER_CONFIG_FILE	"config\\player.txt"
 #define PLAYER_INFO_PATH	"config\\player\\%s"
-#define PLAYER_INFO_MAX		10
+#define PLAYER_INFO_MAX		(10)
 
 struct PlayerInfo
 {
@@ -16,6 +22,8 @@ struct Player
 {
 	char type;
 	char hp;
+	char moveCount;
+	char fireCount;
 	char x;
 	char y;
 };
@@ -68,6 +76,8 @@ void InitPlayer(char sprite, char x, char y)
 
 		player.type = index;
 		player.hp = playerInfo[index].maxHp;
+		player.moveCount = 0;
+		player.fireCount = 0;
 		player.x = x;
 		player.y = y;
 
@@ -82,36 +92,34 @@ bool IsPlayerAlive(void)
 
 void MovePlayer(void)
 {
-	static int frameCount;
-
-	if (frameCount < playerInfo[player.type].framesPerMove - 1)
+	if (player.moveCount < playerInfo[player.type].framesPerMove - 1)
 	{
-		++frameCount;
+		player.moveCount += 1;
 		return;
 	}
 
 	if (GetKey(UP))
 	{
 		player.y -= 1;
-		frameCount = 0;
+		player.moveCount = 0;
 	}
 
 	if (GetKey(DOWN))
 	{
 		player.y += 1;
-		frameCount = 0;
+		player.moveCount = 0;
 	}
 
 	if (GetKey(LEFT))
 	{
 		player.x -= 1;
-		frameCount = 0;
+		player.moveCount = 0;
 	}
 
 	if (GetKey(RIGHT))
 	{
 		player.x += 1;
-		frameCount = 0;
+		player.moveCount = 0;
 	}
 
 	if (player.x < 0)
@@ -129,18 +137,16 @@ void MovePlayer(void)
 
 void FirePlayer(void)
 {
-	static int frameCount;
-
-	if (frameCount < playerInfo[player.type].framesPerFire - 1)
+	if (player.fireCount < playerInfo[player.type].framesPerFire - 1)
 	{
-		++frameCount;
+		player.fireCount += 1;
 		return;
 	}
 
 	if (GetKey(SPACE))
 	{
 		AddBullet(1, player.x, player.y - 1);
-		frameCount = 0;
+		player.fireCount = 0;
 	}
 }
 
@@ -164,10 +170,4 @@ void DrawPlayer(void)
 
 	MoveCursor(5, 29);
 	printf("HP : %d", player.hp);
-
-	MoveCursor(93, 29);
-	printf("%03d,%03d", player.x, player.y);
-
-	MoveCursor(86, 29);
-	printf("%02d", playerInfo[player.type].framesPerMove);
 }
